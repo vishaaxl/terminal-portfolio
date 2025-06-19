@@ -83,7 +83,7 @@ const TerminalPortfolio: React.FC = () => {
     const [input, setInput] = useState<string>("");
     const [history, setHistory] = useState<HistoryItem[]>([]);
     const [particles, setParticles] = useState<Particle[]>([]);
-    const [currentPath, setCurrentPath] = useState<string>("~");
+    const [currentPath] = useState<string>("~"); // Removed `setCurrentPath` as it's unused
 
     // States for interactive help menu
     const [terminalMode, setTerminalMode] = useState<"input" | "helpMenu">(
@@ -121,7 +121,7 @@ const TerminalPortfolio: React.FC = () => {
     const getErrorContent = useCallback(
         (command: string): React.ReactNode => (
             <div className="text-red-400">
-                <p>Command '{command}' not found.</p>
+                <p>Command &apos;{command}&apos; not found.</p>
                 <p>
                     Type <span className="text-green-400">help</span> to see available
                     commands.
@@ -138,7 +138,7 @@ const TerminalPortfolio: React.FC = () => {
                     ══════════════════════════════════════════
                 </div>
                 <div className="text-green-400 font-bold text-lg">
-                    Welcome to Vishal Shukla's Portfolio
+                    Welcome to Vishal Shukla&apos;s Portfolio
                 </div>
                 <div className="text-green-400 font-bold text-lg">
                     ══════════════════════════════════════════
@@ -184,7 +184,7 @@ const TerminalPortfolio: React.FC = () => {
                         Full-stack developer with over four years of experience,
                         specializing in building end-to-end applications using a mix of
                         frontend and backend technologies. I have a thing for clean code and
-                        scalable architecture. If you're reading this, just know—I know a
+                        scalable architecture. If you&apos;re reading this, just know—I know a
                         lot of cool stuff.
                     </p>
                     <div className="mt-4">
@@ -515,7 +515,7 @@ const TerminalPortfolio: React.FC = () => {
                     setTerminalMode("helpMenu");
                     setHelpMenuSelectedIndex(0); // Select the first command by default
                     outputContent = (
-                        <HelpMenuInteractive
+                        <HelpMenuInteractive // This component is now stable as a reference.
                             commands={commands}
                             selectedIndex={0} // Initial selection
                             onSelectCommand={(selectedCmd) => {
@@ -585,8 +585,8 @@ const TerminalPortfolio: React.FC = () => {
             getWhoAmIContent,
             getLsContent,
             getErrorContent,
-            commands, // `commands` is a stable memoized array
-            HelpMenuInteractive, // Nested component is also a dependency if passed directly
+            commands,
+            // Removed HelpMenuInteractive from dependencies as its reference is stable or props are stable.
             setCommandHistory,
             setHistoryIndex,
             setTerminalMode,
