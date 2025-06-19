@@ -52,8 +52,9 @@ const TerminalPortfolio: React.FC = () => {
             <div className="bg-white/10 border border-green-400/50 rounded p-4 shadow-md">
                 <div className="text-green-400 font-bold mb-3">Available Commands:</div>
                 <div className="space-y-1">
-                    {commands.map((cmd, index) => (
-                        <div
+                    {commands.map((cmd, index) => {
+                        if(cmd.command === "help") return
+                        return  <div
                             key={cmd.command}
                             ref={index === selectedIndex ? selectedRef : null}
                             className={`text-white/80 p-1 rounded cursor-pointer transition-colors duration-150
@@ -66,7 +67,7 @@ const TerminalPortfolio: React.FC = () => {
                             </span>
                             <span className="text-white/70">- {cmd.description}</span>
                         </div>
-                    ))}
+                    })}
                 </div>
                 <div className="text-white/60 text-xs mt-3">
                     Use <span className="text-green-400 font-mono">↑↓</span> to navigate,{' '}
